@@ -1,19 +1,17 @@
-let promise = new Promise(function (resolve, reject) {
-  setTimeout(() => {
-    resolve();
-  }, Math.floor(Math.random() * 100) + 1);
-});
-
 function printDouble(number) {
-  console.log(number * 2);
+  return new Promise(function (resolve, reject) {
+    setTimeout(() => {
+      resolve(console.log(number * 2));
+    }, Math.floor(Math.random() * 2000) + 1);
+  });
 }
 
 function printAll() {
-  promise
-    .then(printDouble(5))
-    .then(printDouble(22))
-    .then(printDouble(1))
-    .then(printDouble(90));
+  printDouble(5)
+    .then(() => printDouble(10))
+    .then(() => printDouble(22))
+    .then(() => printDouble(1))
+    .then(() => printDouble(89));
 }
 
 printAll();
